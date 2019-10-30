@@ -1,38 +1,8 @@
 import React from 'react';
-require('../style/generator.css')
-
-/** Component for selecting meme template */
-class TemplateButton extends React.Component {
-  /* 
-      TODO: complete this component
-           Props: meme, an object containing information about the meme.
-                        You'll need the id and url properties.                       
-                  reselectMeme, a function that changes the meme template on the left 
-                                when the image is clicked.
-                  changeText, a function that changes the name of the meme template when
-                              hovering over different templates.
-                  resetText, a function that resets the displayed name to the current
-                             template when the mouse leaves the buttons.
-  */
-
-  render() {
-    return null;
-  }
-}
-
-/** Text box for meme captions */
-class MemeTextBox extends React.Component {
-  /*
-      TODO: complete this component
-          Props: index, a number indicating which text box this is
-                 handleMemeText, a function that updates 
-                                 the state in MemeGeneratorWrapper when we 
-                                 update the text
-  */
-  render() {
-    return null;
-  }
-}
+import MemeTextBox from './MemeTextBox';
+import TemplateButton from './TemplateButton';
+import Canvas from './Canvas';
+require('../../style/generator.css')
 
 /** Component that handles the meme generator */
 class MemeGenerator extends React.Component {
@@ -113,56 +83,4 @@ class MemeGenerator extends React.Component {
     );
   }
 }
-
-/**
- * Component for rendering all canvas elements
- * May be used to also draw text
- */
-class Canvas extends React.Component {
-  constructor(props) {
-    super(props);
-    this.canvasRef = React.createRef();
-  }
-
-  drawImage() {
-    const canvas = this.canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (this.props.imgObj) {
-      let img = new Image();
-      img.onload = () => {ctx.drawImage(img,0,0,img.width,img.height,
-                                            0,0,canvas.width,canvas.height)};
-      img.src = this.props.imgObj.url;
-    }
-  }
-
-  componentDidMount() {
-    this.drawImage();
-  }
-
-  componentDidUpdate() {
-    this.drawImage();
-  }
-
-  render() {
-    let width;
-    let height;
-    if (this.props.imgObj) {
-      width = 500;
-      height = this.props.imgObj.height/(this.props.imgObj.width/500);
-    } else {
-      width = 0;
-      height = 0;
-    }
-    return (
-      <div>
-        <canvas
-          width={width}
-          height={height}
-          ref={this.canvasRef}
-        />
-      </div>
-    );
-  }
-}
-
 export default MemeGenerator;

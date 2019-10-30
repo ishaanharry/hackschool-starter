@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-import MemeGenerator from './pages/MemeGenerator';
-import MemeGallery from './pages/MemeGallery';
+import MemeGenerator from './components/MemeGenerator/MemeGenerator';
+import MemeGallery from './components/MemeGallery/MemeGallery';
 
 
 /** Main app controller */
