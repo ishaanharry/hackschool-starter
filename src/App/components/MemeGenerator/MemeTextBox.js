@@ -10,7 +10,12 @@ class MemeTextBox extends React.Component {
                                  update the text
   */
   render() {
-    return null;
+    return (
+      <div>
+        <h2>Text Box {this.props.index + 1}</h2>
+        <textarea onChange={this.props.handleMemeText}></textarea>
+      </div>
+    );
   }
 }
 
