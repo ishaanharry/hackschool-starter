@@ -2,6 +2,7 @@ import React from 'react';
 import MemeTextBox from './MemeTextBox';
 import TemplateButton from './TemplateButton';
 import Canvas from './Canvas';
+import axios from 'axios';
 require('../../style/generator.css')
 
 /** Component that handles the meme generator */
@@ -25,6 +26,30 @@ class MemeGenerator extends React.Component {
     return (this.state.searchTerm === "" || meme.name.match(regexp) != null);
   }
 
+  /*
+   * TODO: Calls the /upload endpoint and stores meme in database.
+   */
+  uploadMeme = (event) => {
+    // look into what this does
+    event.preventDefault();
+    let myImg = {
+      template_id: this.props.currentMeme.id,
+      photoURL: this.props.currentMeme.url,
+      memeTexts: this.props.memeText,
+      user: "Who"
+    };
+    console.log(this.props.memeText);
+    axios.post('/upload', myImg)
+      .then(response => {
+        if (response.status === 200){
+          window.location.href = "/gallery";
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   createTextBoxes = () => {
     /* 
         TODO: create a list of text boxes for the user to enter text into
@@ -34,6 +59,13 @@ class MemeGenerator extends React.Component {
                    the state in MemeGeneratorWrapper when we 
                    update the text
     */
+    let textBoxList = [];
+    if (this.props.currentMeme != null) {
+      for(let i = 0; i < this.props.currentMeme.box_count; i++) {
+        textBoxList.push(<MemeTextBox index={i} handleMemeText={this.props.handleMemeText}/>)
+      }
+    }
+    return textBoxList;
   }
 
   render() {
