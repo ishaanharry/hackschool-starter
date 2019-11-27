@@ -2,7 +2,7 @@
 Meme generator for teaching principles for creating web-apps. This is the undeployed version of the webapp.
 
 # How to Run
-1) In the main directory, run the command **npm run dev**
+1) In the main directory, run the command **npm install**
 2) Create an account for the imgflip api.
 3) Create a config.json file in the **server** directory. The config.json file should be in the following format:
   {
