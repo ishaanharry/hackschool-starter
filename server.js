@@ -13,7 +13,7 @@ const app = express();
 const server = http.createServer(app);
 
 // Setting up our mongo database
-const dbUrl = process.emv.MONGODB_URI;
+const dbUrl = process.env.MONGODB_URI;
 const dbOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -135,7 +135,7 @@ app.post('/upload', (req, res) => {
     const apiData = {
       template_id: params.template_id,
       username: process.env.IMGFLIP_USERNAME,
-      password: process.emv.IMGFLIP_PASSWORD,
+      password: process.env.IMGFLIP_PASSWORD,
       // we will be using the boxes key instead of text0 and text1 since
       // each memes takes in different amount of texts
       boxes: params.memeTexts.map((text) => {
